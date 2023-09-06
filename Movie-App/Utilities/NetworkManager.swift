@@ -20,7 +20,7 @@ class NetworkManager {
           "Authorization": "Bearer \(API_TOKEN)"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "\(API_URL)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
         request.httpMethod = "GET"
