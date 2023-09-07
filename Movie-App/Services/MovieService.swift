@@ -9,7 +9,7 @@ import Foundation
 
 class MovieService {
     
-    func downloadMovies() {
+    func downloadMovies(completion: @escaping ([MovieResult]?) -> ()) {
         guard let url = URL(string: API_URL) else { return }
         
         NetworkManager.shared.download(url: url) { [weak self] result in
@@ -17,7 +17,7 @@ class MovieService {
             
             switch result {
             case .success(let data):
-                self.handleWithData(data)
+                completion(self.handleWithData(data))
             case .failure(let error):
                 self.handleWithError(error)
             }
@@ -29,8 +29,15 @@ class MovieService {
         print(error.localizedDescription)
     }
     
-    private func handleWithData(_ data: Data) {
-        print(data)
+    private func handleWithData(_ data: Data) -> [MovieResult]? {
+        do {
+            let movie = try JSONDecoder().decode(Movie.self, from: data)
+            return movie.results
+            
+        } catch {
+            print("DEBUG: erro \(error.localizedDescription)")
+            return nil
+        }
     }
         
 }
