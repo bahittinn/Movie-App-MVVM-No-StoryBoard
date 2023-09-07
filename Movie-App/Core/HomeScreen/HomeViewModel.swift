@@ -20,6 +20,7 @@ final class HomeViewModel {
 
 extension HomeViewModel: HomeViewModelInterFace {
     func viewDidLoad() {
-        //view.backgroundColor = .white
+        view?.configureVC()
+        view?.configureCollectionView()
     }
 }
