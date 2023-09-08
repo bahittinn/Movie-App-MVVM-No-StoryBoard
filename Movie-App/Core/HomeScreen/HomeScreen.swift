@@ -46,7 +46,7 @@ extension HomeScreen: HomeScreenInterface {
 
 extension HomeScreen: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10 
+        viewModel.movies.count  
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
