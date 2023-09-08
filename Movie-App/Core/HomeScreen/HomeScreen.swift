@@ -32,11 +32,25 @@ extension HomeScreen: HomeScreenInterface {
     }
     
     func configureCollectionView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.createHomeFlowLayout())
         view.addSubview(collectionView)
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
         
         collectionView.pinToEdgesOf(view: view)
     }
+}
+
+extension HomeScreen: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        10 
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
+        return cell
+    }
 }
