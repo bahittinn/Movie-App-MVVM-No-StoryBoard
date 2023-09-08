@@ -26,6 +26,10 @@ class NetworkManager {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
+       
+
+       
+        
         URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
             if let error = error {
                 print("DEBUG: error is \(error.localizedDescription)")
@@ -34,18 +38,16 @@ class NetworkManager {
             }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                
                 completion(.failure(URLError(.badServerResponse)))
                 return
             }
             
-            guard let data = data else {
-                
+            guard let data = data else { 
                 completion(.failure(URLError(.badURL)))
                 return
             }
             
             completion(.success(data))
-        }
+        }.resume()
     }
 }

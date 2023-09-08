@@ -13,11 +13,15 @@ class MovieCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .orange
- 
+        configureCell()  
     }
  
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureCell() {
+        backgroundColor = .systemGray5
+        layer.cornerRadius = 16
     }
 }
