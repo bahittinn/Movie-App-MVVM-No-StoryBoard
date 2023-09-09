@@ -18,4 +18,8 @@ class PosterImageView: UIImageView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func downloadImage(movie: MovieResult) {
+        
+    }
 }

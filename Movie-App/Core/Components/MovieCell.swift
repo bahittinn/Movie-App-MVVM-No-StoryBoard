@@ -23,6 +23,10 @@ class MovieCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setCell(movie: MovieResult) {
+        posterImageView.downloadImage(movie: movie)
+    }
+    
     private func configureCell() {
         backgroundColor = .systemGray5
         layer.cornerRadius = 16

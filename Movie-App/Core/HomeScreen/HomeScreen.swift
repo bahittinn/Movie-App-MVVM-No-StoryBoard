@@ -51,6 +51,9 @@ extension HomeScreen: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
+        
+        cell.setCell(movie: viewModel.movies[indexPath.row])
+        
         return cell
     }
 }
