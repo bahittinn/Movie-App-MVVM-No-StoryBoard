@@ -23,6 +23,13 @@ class MovieCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        posterImageView.image = nil
+        
+    }
+    
     func setCell(movie: MovieResult) {
         posterImageView.downloadImage(movie: movie)
     }

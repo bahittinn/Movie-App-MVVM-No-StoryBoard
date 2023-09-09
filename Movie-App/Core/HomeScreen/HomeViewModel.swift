@@ -34,7 +34,6 @@ extension HomeViewModel: HomeViewModelInterFace {
             guard let returnedMovies = returnedMovies else { return }
             
             self.movies = returnedMovies
-            print("DEBUG: movies is \(returnedMovies)")
         }
     }
 }

@@ -24,7 +24,7 @@ class PosterImageView: UIImageView {
         
         URLSession.shared.dataTask(with: url) { data, _ , error  in
             guard let data = data else { return }
-            
+
             DispatchQueue.main.async {
                 self.image = UIImage(data: data)
             }
