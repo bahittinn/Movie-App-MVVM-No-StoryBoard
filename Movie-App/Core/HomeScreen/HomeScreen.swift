@@ -47,9 +47,7 @@ extension HomeScreen: HomeScreenInterface {
     }
     
     func reloadCollectionView() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        collectionView.reloadOnMainThread()
     }
 }
 
