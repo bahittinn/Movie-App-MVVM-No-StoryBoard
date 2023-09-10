@@ -11,6 +11,7 @@ protocol HomeScreenInterface: AnyObject {
     func configureVC()
     func configureCollectionView()
     func reloadCollectionView()
+    func navigateToDetailScreen(movie: MovieResult)
 }
 
 class HomeScreen: UIViewController {
@@ -21,7 +22,7 @@ class HomeScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Populer Movies"
+        title = "Popular Movies 🔥"
         navigationController?.navigationBar.prefersLargeTitles = true
         viewModel.view = self
         viewModel.viewDidLoad()
@@ -29,7 +30,6 @@ class HomeScreen: UIViewController {
 }
 
 extension HomeScreen: HomeScreenInterface {
-    
     
     func configureVC() {
         view.backgroundColor = .systemBlue
@@ -49,6 +49,13 @@ extension HomeScreen: HomeScreenInterface {
     
     func reloadCollectionView() {
         collectionView.reloadOnMainThread()
+    }
+    
+    func navigateToDetailScreen(movie: MovieResult) {
+        DispatchQueue.main.async {
+            let detailVC = DetailScreen(movie: movie)
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }
 

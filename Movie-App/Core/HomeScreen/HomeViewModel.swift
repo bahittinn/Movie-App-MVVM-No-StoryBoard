@@ -46,7 +46,7 @@ extension HomeViewModel: HomeViewModelInterFace {
             guard let self = self else { return }
             guard let returnedDetail = returnedDetail else { return}
             
-            print(returnedDetail)
+            self.view?.navigateToDetailScreen(movie: returnedDetail)
         }
     }
 }
