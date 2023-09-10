@@ -11,9 +11,8 @@ class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
     
-    
-    @discardableResult
-    func download(url: URL, completion: @escaping (Result<Data, Error>) -> ()) -> URLSessionDataTask {
+     
+    func download(url: URL, completion: @escaping (Result<Data, Error>) -> ()) {
         
         let headers = [
             "accept": "application/json",
@@ -26,7 +25,7 @@ class NetworkManager {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
-        let dataTask = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+         URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
             if let error = error {
                 print("DEBUG: error is \(error.localizedDescription)")
                 completion(.failure(error))
@@ -44,8 +43,6 @@ class NetworkManager {
             }
             
             completion(.success(data))
-        }
-        dataTask.resume()
-        return dataTask
+         }.resume() 
     }
 }

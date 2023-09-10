@@ -29,7 +29,7 @@ extension HomeViewModel: HomeViewModelInterFace {
     }
     
     func getMovies() { 
-        service.downloadMovies { [weak self] returnedMovies in
+        service.downloadMovies(page: 1) { [weak self] returnedMovies in
             guard let self = self else { return }
             guard let returnedMovies = returnedMovies else { return }
             
