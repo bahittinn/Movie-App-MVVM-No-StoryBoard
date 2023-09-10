@@ -11,26 +11,22 @@ class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
     
-   
     
-    func download(url: URL, completion: @escaping (Result<Data, Error>) -> ()) {
+    @discardableResult
+    func download(url: URL, completion: @escaping (Result<Data, Error>) -> ()) -> URLSessionDataTask {
         
         let headers = [
-          "accept": "application/json",
-          "Authorization": "Bearer \(API_TOKEN)"
+            "accept": "application/json",
+            "Authorization": "Bearer \(API_TOKEN)"
         ]
         
         let request = NSMutableURLRequest(url: NSURL(string: "\(API_URL)")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
-       
-
-       
-        
-        URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
             if let error = error {
                 print("DEBUG: error is \(error.localizedDescription)")
                 completion(.failure(error))
@@ -42,12 +38,14 @@ class NetworkManager {
                 return
             }
             
-            guard let data = data else { 
+            guard let data = data else {
                 completion(.failure(URLError(.badURL)))
                 return
             }
             
             completion(.success(data))
-        }.resume()
+        }
+        dataTask.resume()
+        return dataTask
     }
 }

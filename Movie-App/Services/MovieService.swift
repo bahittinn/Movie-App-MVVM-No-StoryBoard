@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieService {
+final class MovieService {
     
     func downloadMovies(completion: @escaping ([MovieResult]?) -> ()) {
         guard let url = URL(string: APIURLs.movies(page: 1)) else { return }
