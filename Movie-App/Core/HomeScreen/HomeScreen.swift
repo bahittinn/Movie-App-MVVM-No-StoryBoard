@@ -10,6 +10,7 @@ import UIKit
 protocol HomeScreenInterface: AnyObject {
     func configureVC()
     func configureCollectionView()
+    func reloadCollectionView()
 }
 
 class HomeScreen: UIViewController {
@@ -27,6 +28,8 @@ class HomeScreen: UIViewController {
 }
 
 extension HomeScreen: HomeScreenInterface {
+
+    
     func configureVC() {
         view.backgroundColor = .systemBlue
     }
@@ -41,6 +44,12 @@ extension HomeScreen: HomeScreenInterface {
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
         
         collectionView.pinToEdgesOf(view: view)
+    }
+    
+    func reloadCollectionView() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }
 
@@ -63,9 +72,8 @@ extension HomeScreen: UICollectionViewDelegate, UICollectionViewDataSource {
         let height = scrollView.frame.size.height
         
         if offsetY >= contentHeight - (2 * height) {
-            print("get movies")
+            viewModel.getMovies()
         }
-        
     }
     
 }

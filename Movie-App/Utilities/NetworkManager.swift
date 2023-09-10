@@ -19,7 +19,7 @@ class NetworkManager {
             "Authorization": "Bearer \(API_TOKEN)"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "\(API_URL)")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "\(url)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.httpMethod = "GET"
