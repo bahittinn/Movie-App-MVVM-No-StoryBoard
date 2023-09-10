@@ -63,6 +63,10 @@ extension HomeScreen: UICollectionViewDelegate, UICollectionViewDataSource {
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(viewModel.movies[indexPath.row].id!)
+    }
      
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
