@@ -14,21 +14,22 @@ protocol HomeScreenInterface: AnyObject {
 }
 
 class HomeScreen: UIViewController {
-
+    
     private let viewModel = HomeViewModel()
     
     private var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Populer Movies"
+        navigationController?.navigationBar.prefersLargeTitles = true
         viewModel.view = self
         viewModel.viewDidLoad()
     }
 }
 
 extension HomeScreen: HomeScreenInterface {
-
+    
     
     func configureVC() {
         view.backgroundColor = .systemBlue
@@ -53,7 +54,7 @@ extension HomeScreen: HomeScreenInterface {
 
 extension HomeScreen: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.movies.count  
+        viewModel.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,7 +68,7 @@ extension HomeScreen: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.getDetail(id:  viewModel.movies[indexPath.item]._id)
     }
-     
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
