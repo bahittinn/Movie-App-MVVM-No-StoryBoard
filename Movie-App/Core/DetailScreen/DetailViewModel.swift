@@ -19,6 +19,8 @@ final class DetailViewModel {
 
 extension DetailViewModel: DetailViewModelInterface {
     func viewDidLoad() {
-        
+        view?.configureVC()
+        view?.configurePosterImageView()
+        view?.dowloadPosterImage()
     }
 }

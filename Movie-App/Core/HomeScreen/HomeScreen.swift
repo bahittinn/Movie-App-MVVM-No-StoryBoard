@@ -23,7 +23,7 @@ class HomeScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Popular Movies 🔥"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        
         viewModel.view = self
         viewModel.viewDidLoad()
     }
