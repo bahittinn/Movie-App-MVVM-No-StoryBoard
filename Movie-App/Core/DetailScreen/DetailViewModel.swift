@@ -22,5 +22,8 @@ extension DetailViewModel: DetailViewModelInterface {
         view?.configureVC()
         view?.configurePosterImageView()
         view?.dowloadPosterImage()
+        view?.configureTitleLabel()
+        view?.configureDateLabel()
+        view?.configureOverviewLabel()
     }
 }
