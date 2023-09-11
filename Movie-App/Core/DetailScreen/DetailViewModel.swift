@@ -7,6 +7,18 @@
 
 import Foundation
 
-final class DetailViewModel {
+protocol DetailViewModelInterface {
+    var view: DetailScreenInterface? {get set}
     
+    func viewDidLoad()
+}
+
+final class DetailViewModel {
+    weak var view: DetailScreenInterface?
+}
+
+extension DetailViewModel: DetailViewModelInterface {
+    func viewDidLoad() {
+        
+    }
 }

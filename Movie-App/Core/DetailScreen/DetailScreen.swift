@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol DetailScreenInterface: AnyObject {
+    
+}
+
 class DetailScreen: UIViewController {
 
-    let movie: MovieResult
+    private let movie: MovieResult
+    
+    private let viewModel = DetailViewModel()
     
     init(movie: MovieResult) {
         self.movie = movie
@@ -22,8 +28,13 @@ class DetailScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        viewModel.view = self
+        viewModel.viewDidLoad()
+        
         view.backgroundColor = .white
-        print(movie.title ?? "")
     }
+}
+
+extension DetailScreen: DetailScreenInterface {
+    
 }
