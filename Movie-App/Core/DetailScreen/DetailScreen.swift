@@ -14,6 +14,8 @@ protocol DetailScreenInterface: AnyObject {
     func configureTitleLabel()
     func configureDateLabel()
     func configureOverviewLabel()
+    func configureOverviewTitle()
+    func configureDateTitle()
 }
 
 class DetailScreen: UIViewController {
@@ -27,7 +29,8 @@ class DetailScreen: UIViewController {
     private var titleLabel: UILabel!
     private var dateLabel: UILabel!
     private var overviewLabel: UILabel!
-    
+    private var overviewTitleLabel: UILabel!
+    private var dateTitleLabel: UILabel!
     
     init(movie: MovieResult) {
         self.movie = movie
@@ -57,13 +60,12 @@ extension DetailScreen: DetailScreenInterface {
         posterImageView.layer.cornerRadius = 16
         posterImageView.clipsToBounds = true
         
-        let posterWidth = CGFloat.dWidth
+        let posterWidth = CGFloat.dWidth * 0.4
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             posterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            posterImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -padding),
             posterImageView.widthAnchor.constraint(equalToConstant: posterWidth),
-            posterImageView.heightAnchor.constraint(equalToConstant: CGFloat.dWidth * 1.2),
+            posterImageView.heightAnchor.constraint(equalToConstant: posterWidth * 1.5),
         ])
         
         posterImageView.backgroundColor = .red
@@ -84,9 +86,23 @@ extension DetailScreen: DetailScreenInterface {
         titleLabel.numberOfLines = 0
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: padding),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: padding),
+            titleLabel.topAnchor.constraint(equalTo: posterImageView.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: padding),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
+    func configureDateTitle() {
+        dateTitleLabel = UILabel()
+        view.addSubview(dateTitleLabel)
+        
+        dateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateTitleLabel.text = "Release Date"
+        dateTitleLabel.font = .boldSystemFont(ofSize: 18)
+        
+        NSLayoutConstraint.activate([
+            dateTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: padding),
+            dateTitleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: padding)
         ])
     }
     
@@ -98,30 +114,44 @@ extension DetailScreen: DetailScreenInterface {
         
         dateLabel.text = movie._releaseDate
         dateLabel.font = .systemFont(ofSize: 18)
+        dateLabel.textColor = .secondaryLabel
         
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: padding),
-            dateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: padding),
-            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            dateLabel.topAnchor.constraint(equalTo: dateTitleLabel.bottomAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: padding)
         ])
         
         
     }
     
+    func configureOverviewTitle() {
+        overviewTitleLabel = UILabel()
+        view.addSubview(overviewTitleLabel)
+        
+        overviewTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        overviewTitleLabel.text = "Movie Overview"
+        overviewTitleLabel.font = .boldSystemFont(ofSize: 22)
+        
+        NSLayoutConstraint.activate([
+            overviewTitleLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor,constant: padding),
+            overviewTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding)
+        ])
+    }
+    
     func configureOverviewLabel() {
-        overviewLabel = UILabel(frame: .zero)
+        overviewLabel = UILabel()
         view.addSubview(overviewLabel)
         
         overviewLabel.translatesAutoresizingMaskIntoConstraints = false
         
         overviewLabel.text = movie._overview
-        overviewLabel.font = .systemFont(ofSize: 18)
+        overviewLabel.font = .systemFont(ofSize: 20)
         overviewLabel.numberOfLines = 0
         
         NSLayoutConstraint.activate([
-            overviewLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor,constant: padding),
-            overviewLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: padding),
-            overviewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            overviewLabel.topAnchor.constraint(equalTo: overviewTitleLabel.bottomAnchor,constant: padding),
+            overviewLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            overviewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -padding),
         ])
     }
 }

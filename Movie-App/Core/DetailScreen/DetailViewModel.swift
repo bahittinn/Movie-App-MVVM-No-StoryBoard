@@ -23,7 +23,10 @@ extension DetailViewModel: DetailViewModelInterface {
         view?.configurePosterImageView()
         view?.dowloadPosterImage()
         view?.configureTitleLabel()
+        view?.configureDateTitle()
         view?.configureDateLabel()
+        view?.configureOverviewTitle()
         view?.configureOverviewLabel()
+
     }
 }
